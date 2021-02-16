@@ -1,0 +1,65 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['dashboard']">Home</a>
+      
+      <a mat-list-item [matMenuTriggerFor]="payment">
+                   Payment
+         <mat-menu #payment="matMenu">
+            <button mat-menu-item [routerLink]="['proforma-invoice']">Proforma Invoice</button>
+            <button mat-menu-item [routerLink]="['tax']">Tax</button>
+            <button mat-menu-item [routerLink]="['currency']">Currency</button>
+         </mat-menu>
+      </a>  
+      <a mat-list-item [matMenuTriggerFor]="Reports">
+                  Reports
+           <mat-menu #Reports="matMenu">
+            <button mat-menu-item [routerLink]="['']">Reports 1</button><!--add router links here-->
+            <button mat-menu-item [routerLink]="['']">Reports 2</button>
+            <button mat-menu-item [routerLink]="['']">Reports 3</button>
+           </mat-menu>
+      </a> 
+      <a mat-list-item [matMenuTriggerFor]="AMC">
+                   AMC
+          <mat-menu #AMC="matMenu">
+            <button mat-menu-item [routerLink]="['']">AMC</button><!--add router links here-->
+            <button mat-menu-item [routerLink]="['']">Add New AMC</button>
+          </mat-menu>
+      </a>          
+      <a mat-list-item [matMenuTriggerFor]="Products">
+                   Products
+         <mat-menu #Products="matMenu">
+           <button mat-menu-item [routerLink]="['']">All Products</button><!--add router links here-->
+           <button mat-menu-item [routerLink]="['']">Add New Products</button>
+         </mat-menu>
+      </a> 
+      <a mat-list-item [matMenuTriggerFor]="client">
+                   Clients
+          <mat-menu #client="matMenu">
+            <button mat-menu-item [routerLink]="['']">Clients</button><!--add router links here-->
+            <button mat-menu-item [routerLink]="['']">Add new clients</button>
+          </mat-menu>
+      </a> 
+      <a mat-list-item [routerLink]="['']">Setting</a>      
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>AMC</span>   
+    </mat-toolbar>
+    <ng-content></ng-content>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
